@@ -18,6 +18,8 @@ redirect_from:
 
 Today, we're going to build an interactive tic-tac-toe game.
 
+在这里将会创建一款类似“一字棋”游戏的交互界面（圆和叉，轮流排序，率先完成有“3个连成一线”为胜利方）。
+
 If you like, you can check out the final result here: [Final Result](https://codepen.io/gaearon/pen/gWWZgR?editors=0010). Don't worry if the code doesn't make sense to you yet, or if it uses an unfamiliar syntax. We will be learning how to build this game step by step throughout this tutorial.
 
 Try playing the game. You can also click on a link in the move list to go "back in time" and see what the board looked like just after that move was made.
@@ -483,15 +485,23 @@ The end result is the same but by not mutating (or changing the underlying data)
 
 #### Easier Undo/Redo and Time Travel
 
+#### 简化撤消、重做和流程追踪的实现
+
 Immutability also makes some complex features much easier to implement. For example, further in this tutorial we will implement time travel between different stages of the game. Avoiding data mutations lets us keep a reference to older versions of the data, and switch between them if we need to.
 
 #### Tracking Changes
+
+#### 属性变化的监测
 
 Determining if a mutated object has changed is complex because changes are made directly to the object. This then requires comparing the current object to a previous copy, traversing the entire object tree, and comparing each variable and value. This process can become increasingly complex.
 
 Determining how an immutable object has changed is considerably easier. If the object being referenced is different from before, then the object has changed. That's it.
 
+确定一个不可改变（Immutable）数据对象更改情况是相当直接的（注：Immutable.js数据一旦创建是不能被修改，对其的修改会创建新的Immutable对象）。因为不可改变（Immutable）数据对象的引用指针是不同于之前的对象的；所以，一旦被修改，它只会更新自身，而不影响前面的对象引用。仅此而已。
+
 #### Determining When to Re-render in React
+
+#### 确定React组件的再次渲染机会
 
 The biggest benefit of immutability in React comes when you build simple _pure components_. Since immutable data can more easily determine if changes have been made it also helps to determine when a component requires being re-rendered.
 
